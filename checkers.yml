@@ -1,0 +1,61 @@
+---
+- hosts: all
+  sudo: true
+  tasks:
+    - name: install yum utils
+      yum: name=yum-utils state=present
+
+    - name: install git
+      yum: name=git state=present
+
+    - name: install httpd
+      yum: name=httpd state=present
+
+    - name: install epel
+      yum: 
+        name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+    - name: install remi
+      yum: 
+        name: http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
+
+    - name: install php
+      yum: 
+        name: "php"
+        enablerepo: "remi-php72"
+
+    - name: install webtatic
+      yum: 
+        name: https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+
+    - name: mbstring
+      yum: 
+        name: php72w-mbstring.x86_64
+        enablerepo: "remi-php72"
+
+    - name: xml
+      yum: 
+        name: php72w-xml.x86_64
+        enablerepo: "remi-php72"
+
+    - name: install wget
+      yum: name=wget state=present
+
+    - name: download composer
+      script: /etc/ansible/scripts/install_composer.sh
+
+    - name: clone git repository
+      git:
+        dest=/var/www/html/checkers
+        repo=https://github.com/mikehengineer/tsuchecker.git
+
+    - name: install checkers
+      script: /etc/ansible/scripts/install_checkers.sh
+
+    - name: restart apache server
+      service:
+        name: httpd
+        state: restarted
+
+
+

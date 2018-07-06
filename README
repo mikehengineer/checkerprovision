@@ -1,0 +1,41 @@
+Install virtualbox:
+sudo apt-get install virtualbox
+
+Install vagrant:
+sudo apt-get install vagrant
+
+Install ansible:
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo apt-add-repository ppa:ansible/ansible
+sudo apt-get update
+sudo apt-get install ansible
+
+Create directory and navigate to it
+sudo mkdir TSU
+cd TSU
+
+Initialize vagrant
+vagrant init
+
+replace Vagrantfile
+add checkers.yml
+
+mkdir /etc/ansible/scripts
+add install_composer.sh
+add install_checkers.sh
+
+navigate back to ~/TSU
+sudo vagrant up --provision
+
+Vagrant will initialize three servers and run the ansible playbook (checkers.yml) against them.
+
+The three server local addresses are: 192.168.20.20, 192.168.30.30, 192.168.40.40
+
+As of right now I'm having a problem getting apache to play nice with laravel's file permission needs.
+
+Once complete there will be a fourth file, /etc/httpd/conf/httpd.conf, that ansible will replace that will hold the virtual host for the server.  At the moment only Apache's splash page will show.
+
+The application itself is pretty straightforward.  I used a MVC structure to create a restful API where a person can send a POST request with a 8x8 JSON checkerboard and a JSON array holding all of the four in a row combinations will be returned.
+
+The algorithm itself is straightforward.  It checks every square in all eight directions for four in a row.  Once found it is added to the output array.
