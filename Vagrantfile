@@ -5,29 +5,20 @@
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
+
 Vagrant.configure(2) do |config|
+     (1..3).each do |i|
+       config.vm.define "machine#{i}" do |subconfig|
+         subconfig.vm.box = "centos/7"
+         subconfig.vm.network "private_network", ip: "192.168.20.20"
+       end
 
-     config.vm.define "machine1" do |subconfig|
-      subconfig.vm.box = "centos/7"
-      subconfig.vm.network "private_network", ip: "192.168.20.20"
+       config.vm.provision :ansible do |ansible|
+         ansible.playbook = "checkers.yml"
+       end
      end
-
-     config.vm.provision :ansible do |ansible|
-      ansible.playbook = "checkers.yml"
-     end
-
-     #config.vm.define "machine2" do |subconfig|
-      #subconfig.vm.box = "centos/7"
-      #subconfig.vm.network "private_network", ip: "192.168.30.30"
-      #subconfig.playbook = "checkers.yml"
-     #end
-
-     #config.vm.define "machine3" do |subconfig|
-      #subconfig.vm.box = "centos/7"
-      #subconfig.vm.network "private_network", ip: "192.168.40.40"
-      #subconfig.playbook = "checkers.yml"
-     #end
 end
+
   # The most common configuration options are documented and commented below.
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
