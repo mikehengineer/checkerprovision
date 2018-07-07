@@ -1,3 +1,34 @@
+
+The instructions below detail how to install tsucheckers: https://github.com/mikehengineer/tsuchecker.git on
+three virtual machines with Centos7 operating systems.
+
+Technologies used: Laravel, Virtualbox, Vagrant and Ansible
+
+The application was developed with Laravel/PHP7.2 and is fairly straightforward.  The website will accept a POST request 
+from the user who is exepcted to supply a JSON encoded 8x8 two dimensional array.  The application reads in the JSON array 
+and on each square it searches 8 directions (N, NE, E, SE, S, SW, W, NW) for four red or black in a row.  If four in a row 
+are found the starting coordinates, color and direction are added to an array that is returned to the user in a JSON encoded 
+array.
+
+Sample input:
+[
+  ["R","R","B","-","B","B","B","-"],
+  ["B","R","B","B","B","B","-","-"],
+  ["B","R","B","B","R","R","-","B"],
+  ["R","R","R","-","-","R","R","R"],
+  ["B","B","B","R","-","-","-","B"],
+  ["-","R","B","B","B","B","-","B"],
+  ["R","B","-","B","R","B","-","R"],
+  ["B","R","-","R","B","-","-","-"]
+]
+
+Most of the interesting code is in app/http/controllers/CheckersController.php
+
+Additionally, Vagrant is used to instantiate three virtualboxes and runs an Ansible playbook that automates all of the 
+installation and configuration work.
+
+--Instructions--
+
 Install virtualbox:
 sudo apt-get install virtualbox
 
@@ -11,31 +42,30 @@ sudo apt-add-repository ppa:ansible/ansible
 sudo apt-get update
 sudo apt-get install ansible
 
-Create directory and navigate to it
-sudo mkdir TSU
-cd TSU
+In a directory of your choice:
 
-Initialize vagrant
+1. Initialize vagrant
 vagrant init
 
-replace Vagrantfile
-add checkers.yml
+2. Replace default Vagrantfile with the supplied Vagrantfile.
 
-mkdir /etc/ansible/scripts
-add install_composer.sh
-add install_checkers.sh
+3. Verify that checkers.yml is in the same folder as Vagrant and the Vagrantfile
 
-navigate back to ~/TSU
-sudo vagrant up --provision
+4. Inside the /etc/ansible directory:
+Add the "files" and "scripts" folders supplied to the ansible directory.
 
-Vagrant will initialize three servers and run the ansible playbook (checkers.yml) against them.
+5. Navigate back to the directory with Vagrant installed.
 
-The three server local addresses are: 192.168.20.20, 192.168.30.30, 192.168.40.40
+6. Enter sudo vagrant up --provision
 
-As of right now I'm having a problem getting apache to play nice with laravel's file permission needs.
+The servers are good to go.
 
-Once complete there will be a fourth file, /etc/httpd/conf/httpd.conf, that ansible will replace that will hold the virtual host for the server.  At the moment only Apache's splash page will show.
+Each virtual machine can be reached at:
+machine1 - 192.168.10.10
+machine2 - 192.168.20.20
+machine3 - 192.168.30.30
 
-The application itself is pretty straightforward.  I used a MVC structure to create a restful API where a person can send a POST request with a 8x8 JSON checkerboard and a JSON array holding all of the four in a row combinations will be returned.
-
-The algorithm itself is straightforward.  It checks every square in all eight directions for four in a row.  Once found it is added to the output array.
+If you would like to connect to any of the servers:
+sudo vagrant ssh machine1
+sudo vagrant ssh machine2
+sudo vagrant ssh machine3
