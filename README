@@ -1,5 +1,5 @@
 
-The instructions below detail how to install tsucheckers: https://github.com/mikehengineer/tsuchecker.git onthree virtual machines with Centos7 operating systems.
+The instructions below detail how to install tsucheckers: https://github.com/mikehengineer/tsuchecker.git on three virtual machines with Centos7 operating systems.
 
 Technologies used: Laravel, Virtualbox, Vagrant and Ansible
 
