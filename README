@@ -19,7 +19,7 @@ Sample input:
 
 Most of the interesting code is in app/http/controllers/CheckersController.php
 
-Additionally, Vagrant is used to instantiate three virtualboxes and run an Ansible playbook that automates all of the installation and configuration work.
+Additionally, Vagrant is used to instantiate three virtualboxes and runs an Ansible playbook that automates all of the installation and configuration work.
 
 --Instructions--
 
