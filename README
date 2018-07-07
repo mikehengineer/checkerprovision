@@ -1,13 +1,9 @@
 
-The instructions below detail how to install tsucheckers: https://github.com/mikehengineer/tsuchecker.git on
-three virtual machines with Centos7 operating systems.
+The instructions below detail how to install tsucheckers: https://github.com/mikehengineer/tsuchecker.git onthree virtual machines with Centos7 operating systems.
 
 Technologies used: Laravel, Virtualbox, Vagrant and Ansible
 
-The application was developed with Laravel/PHP 7.2 and is fairly straightforward.  The website will accept a POST request 
-from the user who is exepcted to supply a JSON encoded 8x8 two dimensional array.  The application reads in the JSON array 
-and on each square it searches in 8 directions (N, NE, E, SE, S, SW, W, NW) for four red or black squares in a row.  If four 
-in a row are found, the starting coordinates, color and direction are added to an array that is returned to the user in JSON.
+The application was developed with Laravel/PHP 7.2 and is fairly straightforward.  The website will accept a POST request from the user who is exepcted to supply a JSON encoded 8x8 two dimensional array.  The application reads in the JSON array and on each square it searches in 8 directions (N, NE, E, SE, S, SW, W, NW) for four red or black squares in a row.  If four in a row are found, the starting coordinates, color and direction are added to an array that is returned to the user in JSON.
 
 Sample input:
 [
@@ -23,8 +19,7 @@ Sample input:
 
 Most of the interesting code is in app/http/controllers/CheckersController.php
 
-Additionally, Vagrant is used to instantiate three virtualboxes and run an Ansible playbook that automates all of the 
-installation and configuration work.
+Additionally, Vagrant is used to instantiate three virtualboxes and run an Ansible playbook that automates all of the installation and configuration work.
 
 --Instructions--
 
