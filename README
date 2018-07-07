@@ -35,7 +35,7 @@ sudo apt-get update
 sudo apt-get install ansible
 
 In a directory of your choice:
-1. Initialize vagrant
+1. Initialize Vagrant
    vagrant init
 
 2. Replace default Vagrantfile with the supplied Vagrantfile.
