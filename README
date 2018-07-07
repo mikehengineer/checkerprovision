@@ -23,13 +23,13 @@ Additionally, Vagrant is used to instantiate three virtualboxes and run an Ansib
 
 --Instructions--
 
-Install virtualbox:
+Install Virtualbox:
 sudo apt-get install virtualbox
 
-Install vagrant:
+Install Vagrant:
 sudo apt-get install vagrant
 
-Install ansible:
+Install Ansible:
 sudo apt-get update
 sudo apt-get install software-properties-common
 sudo apt-add-repository ppa:ansible/ansible
