@@ -12,10 +12,9 @@ Vagrant.configure(2) do |config|
          subconfig.vm.box = "centos/7"
          subconfig.vm.network "private_network", ip: "192.168.#{i}0.#{i}0"
        end
-
-       config.vm.provision :ansible do |ansible|
+     end
+     config.vm.provision :ansible do |ansible|
          ansible.playbook = "checkers.yml"
-       end
      end
 end
 

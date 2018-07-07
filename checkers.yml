@@ -2,9 +2,6 @@
 - hosts: all
   sudo: true
   tasks:
-    - name: install yum utils
-      yum: name=yum-utils state=present
-
     - name: install git
       yum: name=git state=present
 
@@ -28,12 +25,12 @@
       yum: 
         name: https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
 
-    - name: mbstring
+    - name: install mbstring
       yum: 
         name: php72w-mbstring.x86_64
         enablerepo: "remi-php72"
 
-    - name: xml
+    - name: install xml
       yum: 
         name: php72w-xml.x86_64
         enablerepo: "remi-php72"
@@ -44,13 +41,31 @@
     - name: download composer
       script: /etc/ansible/scripts/install_composer.sh
 
-    - name: clone git repository
+    - name: download checkers
       git:
         dest=/var/www/html/checkers
         repo=https://github.com/mikehengineer/tsuchecker.git
 
     - name: install checkers
       script: /etc/ansible/scripts/install_checkers.sh
+
+    - name: set bootstrap permissions
+      file:
+        path: /var/www/html/checkers/bootstrap
+        owner: apache
+        group: apache
+        mode: 0775
+
+    - name: set virtual host
+      copy:
+        src: /etc/ansible/files/httpd.conf
+        dest: /etc/httpd/conf/httpd.conf
+        owner: apache
+        group: apache
+        mode: 0644
+
+    - name: final touches
+      script: /etc/ansible/scripts/final_touches.sh
 
     - name: restart apache server
       service:
