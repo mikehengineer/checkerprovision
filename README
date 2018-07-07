@@ -45,14 +45,14 @@ sudo apt-get install ansible
 In a directory of your choice:
 
 1. Initialize vagrant
-vagrant init
+   vagrant init
 
 2. Replace default Vagrantfile with the supplied Vagrantfile.
 
 3. Verify that checkers.yml is in the same folder as Vagrant and the Vagrantfile
 
 4. Inside the /etc/ansible directory:
-Add the "files" and "scripts" folders supplied to the ansible directory.
+   Add the "files" and "scripts" folders supplied to the ansible directory.
 
 5. Navigate back to the directory with Vagrant installed.
 
