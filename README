@@ -4,11 +4,10 @@ three virtual machines with Centos7 operating systems.
 
 Technologies used: Laravel, Virtualbox, Vagrant and Ansible
 
-The application was developed with Laravel/PHP7.2 and is fairly straightforward.  The website will accept a POST request 
+The application was developed with Laravel/PHP 7.2 and is fairly straightforward.  The website will accept a POST request 
 from the user who is exepcted to supply a JSON encoded 8x8 two dimensional array.  The application reads in the JSON array 
-and on each square it searches 8 directions (N, NE, E, SE, S, SW, W, NW) for four red or black in a row.  If four in a row 
-are found the starting coordinates, color and direction are added to an array that is returned to the user in a JSON encoded 
-array.
+and on each square it searches in 8 directions (N, NE, E, SE, S, SW, W, NW) for four red or black squares in a row.  If four 
+in a row are found, the starting coordinates, color and direction are added to an array that is returned to the user in JSON.
 
 Sample input:
 [
@@ -24,7 +23,7 @@ Sample input:
 
 Most of the interesting code is in app/http/controllers/CheckersController.php
 
-Additionally, Vagrant is used to instantiate three virtualboxes and runs an Ansible playbook that automates all of the 
+Additionally, Vagrant is used to instantiate three virtualboxes and run an Ansible playbook that automates all of the 
 installation and configuration work.
 
 --Instructions--
@@ -43,22 +42,22 @@ sudo apt-get update
 sudo apt-get install ansible
 
 In a directory of your choice:
-
 1. Initialize vagrant
    vagrant init
 
 2. Replace default Vagrantfile with the supplied Vagrantfile.
 
-3. Verify that checkers.yml is in the same folder as Vagrant and the Vagrantfile
+3. Verify that checkers.yml is in the same folder as Vagrant and the Vagrantfile.
 
 4. Inside the /etc/ansible directory:
-   Add the "files" and "scripts" folders supplied to the ansible directory.
+   Add the "files" and "scripts" folders supplied.
 
-5. Navigate back to the directory with Vagrant installed.
+5. Navigate back to the directory with the Vagrant install.
 
-6. Enter sudo vagrant up --provision
+6. Intialize and provision the virtual machines.
+   sudo vagrant up --provision
 
-The servers are good to go.
+The setup will take several minutes.
 
 Each virtual machine can be reached at:
 machine1 - 192.168.10.10
