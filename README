@@ -19,7 +19,7 @@ Sample input:
 
 Locally, in each virtual machine, the application can be found in /var/www/html/checkers
 
-Most of the interesting code is in App/Http/Controllers/CheckersController.php
+Most of the interesting code is in app/http/controllers/CheckersController.php
 
 Additionally, Vagrant is used to instantiate three virtualboxes and runs an Ansible playbook that automates all of the installation and configuration work.
 
